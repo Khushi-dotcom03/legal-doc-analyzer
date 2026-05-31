@@ -1,0 +1,6 @@
+streamlit
+langgraph
+langchain-groq
+langchain
+pymupdf
+python-dotenv
