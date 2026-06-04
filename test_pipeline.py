@@ -1,25 +1,43 @@
-from utils import extract_text_from_pdf, chunk_text, summarize_document, flag_risky_clauses
+from agent import legal_doc_graph
+from utils import extract_text_from_pdf
 
-# --- Config ---
-PDF_PATH = "assets/sample.pdf"
+# --- Test 1: Full analysis, no question ---
+print("=" * 50)
+print("TEST 1: Analysis only (no follow-up question)")
+print("=" * 50)
 
-# --- Run pipeline ---
-print("📄 Extracting text...")
-text = extract_text_from_pdf(PDF_PATH)
-print(f"✅ Extracted {len(text)} characters\n")
+text = extract_text_from_pdf("assets/sample.pdf")
 
-print("✂️ Chunking text...")
-chunks = chunk_text(text)
-print(f"✅ Created {len(chunks)} chunks\n")
+result = legal_doc_graph.invoke({
+    "raw_text": text,
+    "chunks": [],
+    "summary": "",
+    "risky_clauses": [],
+    "question": "",   # empty = skip QA node
+    "answer": "",
+    "error": ""
+})
 
-print("🤖 Summarizing document...")
-summary = summarize_document(chunks)
-print("📝 SUMMARY:")
-print(summary)
-print()
+print("\n📝 SUMMARY:")
+print(result["summary"])
+print(f"\n🚩 RISKY CLAUSES ({len(result['risky_clauses'])} found):")
+for clause in result["risky_clauses"]:
+    print(f"  ⚠️  {clause}")
 
-print("🚩 Flagging risky clauses...")
-flags = flag_risky_clauses(chunks)
-print(f"⚠️ Found {len(flags)} risky clause(s):")
-for flag in flags:
-    print(f"  • {flag}")
+# --- Test 2: With a follow-up question ---
+print("\n" + "=" * 50)
+print("TEST 2: Analysis + follow-up question")
+print("=" * 50)
+
+result2 = legal_doc_graph.invoke({
+    "raw_text": text,
+    "chunks": [],
+    "summary": "",
+    "risky_clauses": [],
+    "question": "Can I terminate this agreement early and what are the penalties?",
+    "answer": "",
+    "error": ""
+})
+
+print("\n💬 QUESTION ANSWERED:")
+print(result2["answer"])
