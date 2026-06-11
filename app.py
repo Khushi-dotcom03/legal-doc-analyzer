@@ -930,7 +930,7 @@ if st.session_state.stage == "upload":
         st.markdown("""
         <div class="cg-section-card">
             <div class="cg-section-eyebrow">Get Started</div>
-            <div class="cg-section-title">⬆ Upload Your Legal Document</div>
+            <div class="cg-section-title"> Upload Document</div>
             <p class="cg-prose">
                 ClauseGuard AI reviews your legal documents in seconds, surfacing hidden risks,
                 key obligations, and critical deadlines — in plain English.
@@ -973,12 +973,13 @@ if st.session_state.stage == "upload":
         """, unsafe_allow_html=True)
 
         features = [
-            ("🛡", "Risk Clauses", "Identifies clauses that may disadvantage you"),
-            ("🛡", "Key Obligations", "Separates your duties from theirs"),
-            ("🛡", "Critical Dates", "Deadlines, notice periods, renewals"),
-            ("🛡", "Plain Summary", "Legal jargon explained simply"),
-            ("🛡", "AI Chat", "Ask follow-up questions instantly"),
+            ("○", "Risk Clauses", "Identifies clauses that may disadvantage you"),
+            ("○", "Key Obligations", "Separates your duties from theirs"),
+            ("○", "Critical Dates", "Deadlines, notice periods, renewals"),
+            ("○", "Plain Summary", "Legal jargon explained simply"),
+            ("○", "AI Chat", "Ask follow-up questions instantly"),
         ]
+
         for icon, title, desc in features:
             st.markdown(f"""
             <div style="display:flex;align-items:flex-start;gap:14px;padding:12px 0;
