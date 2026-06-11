@@ -727,11 +727,11 @@ MOCK_ANALYSIS = {
         },
     ],
     "dates": [
-        {"icon": "📅", "label": "Start Date", "value": "15 August 2026"},
-        {"icon": "⏳", "label": "Probation Period", "value": "6 months (ends 15 Feb 2027)"},
-        {"icon": "📋", "label": "Notice Period (Employee)", "value": "90 days written notice"},
-        {"icon": "🔒", "label": "Non-Compete Duration", "value": "24 months post-termination"},
-        {"icon": "📄", "label": "Contract Renewal Review", "value": "Annually in December"},
+        {"icon": "+", "label": "Start Date", "value": "15 August 2026"},
+        {"icon": "+", "label": "Probation Period", "value": "6 months (ends 15 Feb 2027)"},
+        {"icon": "+", "label": "Notice Period (Employee)", "value": "90 days written notice"},
+        {"icon": "+", "label": "Non-Compete Duration", "value": "24 months post-termination"},
+        {"icon": "+", "label": "Contract Renewal Review", "value": "Annually in December"},
     ],
 }
 
@@ -806,7 +806,7 @@ with st.sidebar:
         # Document info card
         st.markdown(f"""
         <div class="cg-sidebar-section">
-            <div class="cg-sidebar-label">📄 Document</div>
+            <div class="cg-sidebar-label"> Document</div>
             <div class="cg-sidebar-row">
                 <span class="cg-sidebar-key">Type</span>
                 <span class="cg-sidebar-val">{a['doc_type']}</span>
@@ -834,7 +834,7 @@ with st.sidebar:
         risk_color = {"low": "#34D399", "medium": "#F59E0B", "high": "#F87171"}[a["risk_level"]]
         st.markdown(f"""
         <div class="cg-sidebar-section">
-            <div class="cg-sidebar-label">⚠️ Risk Overview</div>
+            <div class="cg-sidebar-label"> Risk Overview</div>
             <div class="cg-sidebar-row">
                 <span class="cg-sidebar-key">Score</span>
                 <span class="cg-sidebar-val" style="color:{risk_color}!important">{a['risk_score']}/100</span>
@@ -866,7 +866,7 @@ with st.sidebar:
         )
 
         st.markdown("<br>", unsafe_allow_html=True)
-        if st.button("🔄  Analyse New Document", use_container_width=True):
+        if st.button("  Analyse New Document", use_container_width=True):
             st.session_state.stage = "upload"
             st.session_state.analysis = None
             st.session_state.chat_history = []
@@ -881,11 +881,11 @@ with st.sidebar:
         """, unsafe_allow_html=True)
 
         steps = [
-            ("📤", "Upload your legal document"),
-            ("🔍", "AI extracts and chunks text"),
-            ("🧠", "Groq LLM analyses clauses"),
-            ("⚠️", "Risk clauses are flagged"),
-            ("💬", "Ask follow-up questions"),
+            ("-", "Upload your legal document"),
+            ("-", "AI extracts and chunks text"),
+            ("-", "Groq LLM analyses clauses"),
+            ("-", "Risk clauses are flagged"),
+            ("-", "Ask follow-up questions"),
         ]
         for icon, text in steps:
             st.markdown(f"""
@@ -949,7 +949,7 @@ if st.session_state.stage == "upload":
             st.markdown(f"""
             <div style="background:#F0FDF4;border:1.5px solid #BBF7D0;border-radius:10px;
                         padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:12px;">
-                <span style="font-size:22px;">📄</span>
+                <span style="font-size:22px;"></span>
                 <div>
                     <div style="font-size:13px;font-weight:700;color:#15803D;">{uploaded_file.name}</div>
                     <div style="font-size:11px;color:#16A34A;">{uploaded_file.size / 1024:.1f} KB · PDF</div>
@@ -959,7 +959,7 @@ if st.session_state.stage == "upload":
             """, unsafe_allow_html=True)
 
             st.markdown("<br>", unsafe_allow_html=True)
-            if st.button("🔍  Analyse Document", use_container_width=True):
+            if st.button("  Analyse Document", use_container_width=True):
                 st.session_state.filename = uploaded_file.name
                 st.session_state.stage = "processing"
                 st.session_state.processing_step = 0
@@ -973,11 +973,11 @@ if st.session_state.stage == "upload":
         """, unsafe_allow_html=True)
 
         features = [
-            ("⚠️", "Risk Clauses", "Identifies clauses that may disadvantage you"),
-            ("📋", "Key Obligations", "Separates your duties from theirs"),
-            ("📅", "Critical Dates", "Deadlines, notice periods, renewals"),
-            ("📝", "Plain Summary", "Legal jargon explained simply"),
-            ("💬", "AI Chat", "Ask follow-up questions instantly"),
+            ("🛡", "Risk Clauses", "Identifies clauses that may disadvantage you"),
+            ("🛡", "Key Obligations", "Separates your duties from theirs"),
+            ("🛡", "Critical Dates", "Deadlines, notice periods, renewals"),
+            ("🛡", "Plain Summary", "Legal jargon explained simply"),
+            ("🛡", "AI Chat", "Ask follow-up questions instantly"),
         ]
         for icon, title, desc in features:
             st.markdown(f"""
@@ -996,8 +996,8 @@ if st.session_state.stage == "upload":
         st.markdown("""
         <div style="font-size:11px;color:var(--text-muted);margin-top:16px;padding:12px;
                     background:var(--bg);border-radius:8px;line-height:1.6;">
-            ⚡ Analysis typically completes in under 30 seconds.<br>
-            🔒 Your document is processed securely and never stored.
+             Analysis typically completes in under 30 seconds.<br>
+             Your document is processed securely and never stored.
         </div>
         </div>
         """, unsafe_allow_html=True)
@@ -1084,7 +1084,7 @@ elif st.session_state.stage == "results":
     st.markdown(f"""
     <div class="cg-stat-row">
         <div class="cg-stat-card">
-            <div class="cg-stat-icon">📄</div>
+            <div class="cg-stat-icon"></div>
             <div class="cg-stat-value">{a['clauses']}</div>
             <div class="cg-stat-label">Total Clauses</div>
         </div>
@@ -1099,7 +1099,7 @@ elif st.session_state.stage == "results":
             <div class="cg-stat-label">Medium-Risk Clauses</div>
         </div>
         <div class="cg-stat-card">
-            <div class="cg-stat-icon">✍️</div>
+            <div class="cg-stat-icon"></div>
             <div class="cg-stat-value">{obligations}</div>
             <div class="cg-stat-label">Your Obligations</div>
         </div>
@@ -1108,11 +1108,11 @@ elif st.session_state.stage == "results":
 
     # ── Tabs ──
     tab_summary, tab_obligations, tab_risks, tab_dates, tab_chat = st.tabs([
-        "📝  Summary",
-        "⚖️  Obligations & Rights",
-        "🚨  Risk Clauses",
-        "📅  Dates & Deadlines",
-        "💬  AI Assistant",
+        "  Summary",
+        "  Obligations & Rights",
+        "  Risk Clauses",
+        "  Dates & Deadlines",
+        "  AI Assistant",
     ])
 
     # ── TAB 1: Summary ──
@@ -1120,7 +1120,7 @@ elif st.session_state.stage == "results":
         st.markdown(f"""
         <div class="cg-section-card">
             <div class="cg-section-eyebrow">Plain-English Analysis</div>
-            <div class="cg-section-title">📋 Executive Summary</div>
+            <div class="cg-section-title"> Executive Summary</div>
             <p class="cg-prose">{a['summary']}</p>
         </div>
         """, unsafe_allow_html=True)
@@ -1148,7 +1148,7 @@ elif st.session_state.stage == "results":
             st.markdown("""
             <div class="cg-section-card">
                 <div class="cg-section-eyebrow">Your Responsibilities</div>
-                <div class="cg-section-title">✍️ Your Obligations</div>
+                <div class="cg-section-title"> Your Obligations</div>
             """, unsafe_allow_html=True)
             for o in a["obligations"]:
                 if o["party"] == "you":
@@ -1164,7 +1164,7 @@ elif st.session_state.stage == "results":
             st.markdown("""
             <div class="cg-section-card">
                 <div class="cg-section-eyebrow">Their Commitments</div>
-                <div class="cg-section-title">🤝 Their Obligations</div>
+                <div class="cg-section-title"> Their Obligations</div>
             """, unsafe_allow_html=True)
             for o in a["obligations"]:
                 if o["party"] == "them":
@@ -1217,7 +1217,7 @@ elif st.session_state.stage == "results":
                     <span class="cg-risk-severity {badge_class}">{r['severity'].upper()}</span>
                 </div>
                 <div class="cg-risk-clause-text">"{r['text']}"</div>
-                <div class="cg-risk-clause-why">💡 Why this matters: {r['why']}</div>
+                <div class="cg-risk-clause-why"> Why this matters: {r['why']}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1226,7 +1226,7 @@ elif st.session_state.stage == "results":
         st.markdown("""
         <div class="cg-section-card">
             <div class="cg-section-eyebrow">Timeline</div>
-            <div class="cg-section-title">📅 Important Dates & Deadlines</div>
+            <div class="cg-section-title"> Important Dates & Deadlines</div>
         """, unsafe_allow_html=True)
         for d in a["dates"]:
             st.markdown(f"""
@@ -1245,7 +1245,7 @@ elif st.session_state.stage == "results":
         st.markdown("""
         <div class="cg-section-card" style="padding-bottom:8px;">
             <div class="cg-section-eyebrow">AI Legal Assistant</div>
-            <div class="cg-section-title">💬 Ask Questions About Your Document</div>
+            <div class="cg-section-title"> Ask Questions About Your Document</div>
             <p class="cg-prose" style="margin-bottom:20px;">
                 Ask anything about the clauses, obligations, or terms in your document.
             </p>
